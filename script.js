@@ -13,25 +13,29 @@ for (let i = 0; i < 256; i++) {
 
   container.appendChild(box);
 }
+container.style.display = "grid";
+container.style.gridTemplateColumns = "repeat(16,1fr)";
+container.style.gridTemplateRows = "repeat(16,1fr)";
 
 const divMaker = function (nums) {
-  console.log(nums);
   while (container.firstChild) {
-    container.removeChild(container.children[0]);
+    container.removeChild(container.firstChild);
   }
-  //   console.log(container.hasChildNodes());
-  for (let i = 0; i < nums; i++) {
+  const newGrid = nums * nums;
+  console.log(newGrid);
+  for (let i = 0; i < newGrid; i++) {
     const box = document.createElement("div");
-    box.classList.add(`box-${i + 1}`);
+    box.classList.add(`box`);
 
     container.appendChild(box);
   }
+  container.style.gridTemplateColumns = `repeat(${nums},1fr)`;
+  container.style.gridTemplateRows = `repeat(${nums},1fr)`;
 };
 
 const tracker = function (e) {
   if (e.target.classList.contains("box")) {
-    console.log("yes");
-    e.target.style.backgroundColor = "blue";
+    e.target.style.backgroundColor = "black";
   }
 };
 
@@ -46,6 +50,6 @@ const clicker = function () {
   }
   divMaker(num);
 };
-// window.addEventListener("mouseover", (e) => tracker(e));
+window.addEventListener("mouseover", (e) => tracker(e));
 
-window.addEventListener("click", () => clicker());
+btn.addEventListener("click", () => clicker());
