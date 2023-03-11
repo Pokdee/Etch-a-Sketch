@@ -17,12 +17,13 @@ container.style.display = "grid";
 container.style.gridTemplateColumns = "repeat(16,1fr)";
 container.style.gridTemplateRows = "repeat(16,1fr)";
 
+// btn click part
+
 const divMaker = function (nums) {
   while (container.firstChild) {
     container.removeChild(container.firstChild);
   }
   const newGrid = nums * nums;
-  console.log(newGrid);
   for (let i = 0; i < newGrid; i++) {
     const box = document.createElement("div");
     box.classList.add(`box`);
@@ -31,12 +32,6 @@ const divMaker = function (nums) {
   }
   container.style.gridTemplateColumns = `repeat(${nums},1fr)`;
   container.style.gridTemplateRows = `repeat(${nums},1fr)`;
-};
-
-const tracker = function (e) {
-  if (e.target.classList.contains("box")) {
-    e.target.style.backgroundColor = "black";
-  }
 };
 
 const clicker = function () {
@@ -50,6 +45,29 @@ const clicker = function () {
   }
   divMaker(num);
 };
-window.addEventListener("mouseover", (e) => tracker(e));
+
+const tracker = function (e) {
+  if (e.target.classList.contains("box")) {
+    e.target.style.backgroundColor = "black";
+  }
+};
 
 btn.addEventListener("click", () => clicker());
+
+// the drawing part
+
+let isClick;
+
+window.addEventListener("mousedown", (e) => {
+  isClick = true;
+  tracker(e);
+});
+window.addEventListener("mouseup", () => {
+  isClick = false;
+});
+
+window.addEventListener("mousemove", (e) => {
+  if (isClick) {
+    tracker(e);
+  }
+});
