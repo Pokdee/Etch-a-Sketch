@@ -29,16 +29,16 @@ body {
   cursor: pointer;
 }
 
-.btn {
-  background-color: crimson;
-  border-radius: 10px;
-  margin: auto;
-  width: 20%;
-  height: 3rem;
-  margin: 2rem auto;
-  margin-left: 40%;
-  margin-left: 40%;
+.tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 1.3rem;
+  margin: 1.5rem auto;
 }
-.btn:hover {
-  cursor: pointer;
+
+.inputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
