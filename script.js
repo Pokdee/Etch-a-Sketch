@@ -3,6 +3,7 @@ const container = document.createElement("div");
 const inputPix = document.querySelector(".pixel");
 const inputVal = document.querySelector(".pixelOut");
 const colorIn = document.querySelector('[id = "colors"]');
+const eraser = document.querySelector(".eraser");
 
 ///
 container.classList.add("container");
@@ -74,7 +75,31 @@ inputPix.addEventListener("input", () => {
 
 //Color Picker
 
+let colorPicked;
+
 colorIn.addEventListener("input", () => {
-  const value = colorIn.value;
-  drawIng(value);
+  const colorPicked = colorIn.value;
+  if (eraser.style.backgroundColor === "green") {
+    drawIng("gray");
+  } else {
+    drawIng(colorPicked);
+  }
+  console.log(colorPicked);
+});
+
+///Eraser
+
+let isOn = false;
+
+eraser.addEventListener("click", (e) => {
+  isOn = !isOn;
+  console.log(isOn);
+  if (isOn) {
+    eraser.style.backgroundColor = "green";
+    drawIng("gray");
+  } else {
+    eraser.style.backgroundColor = "red";
+    console.log(colorPicked);
+    drawIng(colorPicked);
+  }
 });
