@@ -22,6 +22,30 @@ container.style.display = "grid";
 container.style.gridTemplateColumns = "repeat(16,1fr)";
 container.style.gridTemplateRows = "repeat(16,1fr)";
 
+// new Grid Control
+
+const divMaker = function (nums) {
+  const newGrid = nums * nums;
+
+  while (container.firstChild) {
+    container.removeChild(container.firstChild);
+  }
+  for (let i = 0; i < newGrid; i++) {
+    const box = document.createElement("div");
+    box.classList.add(`box`);
+
+    container.appendChild(box);
+  }
+  container.style.gridTemplateColumns = `repeat(${nums},1fr)`;
+  container.style.gridTemplateRows = `repeat(${nums},1fr)`;
+};
+inputPix.addEventListener("input", () => {
+  const value = inputPix.value;
+  inputVal.textContent = value;
+  divMaker(value);
+});
+////
+
 // the drawing part
 
 const pen = function (e, color) {
@@ -49,57 +73,31 @@ const drawIng = function (color = "black") {
 };
 drawIng();
 
-// new Grid Control
-
-const divMaker = function (nums) {
-  const newGrid = nums * nums;
-
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
-  }
-  for (let i = 0; i < newGrid; i++) {
-    const box = document.createElement("div");
-    box.classList.add(`box`);
-
-    container.appendChild(box);
-  }
-  container.style.gridTemplateColumns = `repeat(${nums},1fr)`;
-  container.style.gridTemplateRows = `repeat(${nums},1fr)`;
-};
-inputPix.addEventListener("input", () => {
-  const value = inputPix.value;
-  inputVal.textContent = value;
-  divMaker(value);
-});
-////
-
 //Color Picker
 
-let colorPicked;
+let colorPicked = "black";
 
 colorIn.addEventListener("input", () => {
-  const colorPicked = colorIn.value;
+  colorPicked = colorIn.value;
+
   if (eraser.style.backgroundColor === "green") {
     drawIng("gray");
   } else {
     drawIng(colorPicked);
   }
-  console.log(colorPicked);
 });
 
 ///Eraser
 
-let isOn = false;
+let erase = false;
 
 eraser.addEventListener("click", (e) => {
-  isOn = !isOn;
-  console.log(isOn);
-  if (isOn) {
+  erase = !erase;
+  if (erase) {
     eraser.style.backgroundColor = "green";
     drawIng("gray");
   } else {
     eraser.style.backgroundColor = "red";
-    console.log(colorPicked);
     drawIng(colorPicked);
   }
 });
